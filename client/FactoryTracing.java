@@ -100,8 +100,7 @@ public interface FactoryTracing extends AutoCloseable {
     private static FactoryTracing create(String uri, @Nullable FactoryTokenAuthClientInterceptor authClientInterceptor) {
         ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forTarget(uri)
                 .keepAliveTime(1, TimeUnit.MINUTES)
-                .keepAliveWithoutCalls(true)
-                .useTransportSecurity();
+                .keepAliveWithoutCalls(true);
         if (authClientInterceptor != null) channelBuilder.intercept(authClientInterceptor);
         return new FactoryTracingStandard(channelBuilder.build());
     }
